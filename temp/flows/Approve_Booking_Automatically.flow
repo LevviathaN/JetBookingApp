@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignments>
+        <description>When Pilot Flied Hours &gt;= Jet Required Min Pilot Hours , system should automatically set booking status to “Automatically Approved”</description>
+        <name>Approve_Automatically_0</name>
+        <label>Approve Automatically</label>
+        <locationX>50</locationX>
+        <locationY>551</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Jet_Booking_Record.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Automatically Approved</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Verify_pilot_flied_hours</name>
+        <label>Verify pilot flied hours</label>
+        <locationX>270</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Pilot_is_valid</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Jet_Booking_Record.Customer__r.Total_Flied_Hours__c</leftValueReference>
+                <operator>GreaterThanOrEqualTo</operator>
+                <rightValue>
+                    <elementReference>Get_Jet_Booking_Record.Jet__r.Min_Required_Pilot_Hours__c</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Approve_Automatically_0</targetReference>
+            </connector>
+            <label>Pilot is valid</label>
+        </rules>
+        <rules>
+            <name>Pilot_is_not_valid</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Jet_Booking_Record.Customer__r.Total_Flied_Hours__c</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <elementReference>Get_Jet_Booking_Record.Jet__r.Min_Required_Pilot_Hours__c</elementReference>
+                </rightValue>
+            </conditions>
+            <label>Pilot is not valid</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Approve Booking Automatically {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Approve Booking Automatically</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Jet_Booking_Record</name>
+        <label>Get Jet Booking Record</label>
+        <locationX>270</locationX>
+        <locationY>311</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Verify_pilot_flied_hours</targetReference>
+        </connector>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Created</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Jet_Booking__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>144</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Jet_Booking_Record</targetReference>
+        </connector>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Created</stringValue>
+            </value>
+        </filters>
+        <object>Jet_Booking__c</object>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+    <variables>
+        <name>var</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

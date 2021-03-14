@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Jet_Weight_Validation</fullName>
+    <active>true</active>
+    <description>Validation rule to ensure that airports runway is capable for the mass of the jet</description>
+    <errorConditionFormula>Jet__r.Weight__c  &gt;  Arival_Airport__r.Runway_Max_Weight_Capacity__c</errorConditionFormula>
+    <errorDisplayField>Arival_Airport__c</errorDisplayField>
+    <errorMessage>Selected Arival Airport is not capable of receiving jet with such mass. Please select lighter Jet or more capable Airport</errorMessage>
+</ValidationRule>

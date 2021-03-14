@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Commerce_Option_On</fullName>
+    <active>true</active>
+    <errorConditionFormula>(RecordType.DeveloperName = &quot;Commerce&quot;) &amp;&amp; ISBLANK(Required_Capacity__c)</errorConditionFormula>
+    <errorDisplayField>Required_Capacity__c</errorDisplayField>
+    <errorMessage>You need to specify Capacity for Commerce booking</errorMessage>
+</ValidationRule>

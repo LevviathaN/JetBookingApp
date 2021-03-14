@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Min_Required_Pilot_Hours__c</fullName>
+    <description>Minimum amount flied hors needed for pilot to fly on this jet</description>
+    <externalId>false</externalId>
+    <label>Min Required Pilot Hours</label>
+    <precision>10</precision>
+    <required>true</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>
