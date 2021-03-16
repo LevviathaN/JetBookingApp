@@ -36,6 +36,10 @@
                 <behavior>Readonly</behavior>
                 <field>Total_Flied_Hours__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Details__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
