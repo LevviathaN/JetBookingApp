@@ -1,7 +1,5 @@
 public with sharing class ApprovalProcessHelper {
-    public ApprovalProcessHelper() {
-        
-    }
+
     void submitAndProcessApprovalRequest() {
         // Insert an account
         Jet__c a = new Jet__c(Min_Required_Pilot_Hours__c=33);
