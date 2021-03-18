@@ -3,11 +3,7 @@ public with sharing class JetTriggerHandler {
 
     }
 
-    public static void onBeforeInsert() {
-        
-    }
-
-    public static void onBeforeUpdate(Map<id, Jet__c> insertdNewMap, Map<id, Jet__c> insertdOldMap) {
+    public static void onBeforeInsertUpdate(Map<id, Jet__c> insertdNewMap, Map<id, Jet__c> insertdOldMap) {
         List<Jet__c> jetsToUpdate = new List<Jet__c>();
 
         for (Id jetId : insertdNewMap.keySet()) {
