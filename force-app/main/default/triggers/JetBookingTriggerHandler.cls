@@ -4,7 +4,7 @@ public with sharing class JetBookingTriggerHandler {
     }
 
     public static void onBeforeInsert(List<Jet_Booking__c> insertdList) {
-
+        
     }
 
     public static void onBeforeUpdate(Map<id, Jet_Booking__c> insertdNewMap, Map<id, Jet_Booking__c> insertdOldMap) {
@@ -18,7 +18,7 @@ public with sharing class JetBookingTriggerHandler {
             }
             
             else if (booking.Customer__r.Total_Flied_Hours__c < booking.Jet__r.Min_Required_Pilot_Hours__c) {
-                ConnectApi.FeedElement feedElement = ConnectApi.ChatterFeeds.postFeedElement(Network.getNetworkId(), 'Jet_Operators', ConnectApi.FeedElementType.FeedItem, 'On vacation this week.');
+                ApprovalProcessHelper.submitAndProcessApprovalRequest(booking);
                 booking.Status__c = 'Automatically Approved';
                 bookingsToUpdate.add(booking);
             }

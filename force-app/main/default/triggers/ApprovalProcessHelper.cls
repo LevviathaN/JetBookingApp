@@ -1,17 +1,16 @@
 public with sharing class ApprovalProcessHelper {
 
-    void submitAndProcessApprovalRequest() {
+    public static void submitAndProcessApprovalRequest(Jet_Booking__c booking) {
         // Insert an account
-        Jet__c a = new Jet__c(Min_Required_Pilot_Hours__c=33);
-        insert a;
+        // Jet__c a = new Jet__c(Min_Required_Pilot_Hours__c=33);
+        // insert a;
            
-        User user1 = [SELECT Id FROM User WHERE Alias='Uuser'];
+        User user1 = [SELECT id FROM User WHERE UserRole.Name = 'Booking Operator'];
             
         // Create an approval request for the account
-        Approval.ProcessSubmitRequest req1 = 
-            new Approval.ProcessSubmitRequest();
+        Approval.ProcessSubmitRequest req1 = new Approval.ProcessSubmitRequest();
         req1.setComments('Submitting request for approval.');
-        req1.setObjectId(a.id);
+        req1.setObjectId(booking.id);
         
         // Submit on behalf of a specific submitter
         req1.setSubmitterId(user1.Id); 
@@ -29,6 +28,7 @@ public with sharing class ApprovalProcessHelper {
         System.assertEquals(
             'Pending', result.getInstanceStatus(), 
             'Instance Status'+result.getInstanceStatus());
+        // verifyResultOfApprovalRequest(result);
         
         // Approve the submitted request
         // First, get the ID of the newly created item
@@ -54,4 +54,12 @@ public with sharing class ApprovalProcessHelper {
             'Approved', result2.getInstanceStatus(), 
             'Instance Status'+result2.getInstanceStatus());
     }
+
+    // public static void verifyResultOfApprovalRequest(Approval.ProcessResult rslt) {
+    //     System.assert(rslt.isSuccess());
+        
+    //     System.assertEquals(
+    //         'Pending', rslt.getInstanceStatus(), 
+    //         'Instance Status'+rslt.getInstanceStatus());
+    // }
 }
