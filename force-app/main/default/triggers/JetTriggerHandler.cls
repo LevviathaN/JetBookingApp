@@ -19,7 +19,7 @@ public with sharing class JetTriggerHandler {
 
         for (Id jetId : insertdNewMap.keySet()) {
             Jet__c jet = insertdNewMap.get(jetId);
-            if (jet.Total_Flied_Hours__c < 1000) {
+            if (jet.Total_Flied_Hours__c > 1000) {
                 Date d = Date.today().addDays(14);
                 Datetime dt = (DateTime)d;
                 String dayOfWeek = dt.format('EEEE');
