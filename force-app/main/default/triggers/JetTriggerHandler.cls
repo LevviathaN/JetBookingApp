@@ -3,7 +3,18 @@ public with sharing class JetTriggerHandler {
 
     }
 
-    public static void onBeforeInsertUpdate(Map<id, Jet__c> insertdNewMap, Map<id, Jet__c> insertdOldMap) {
+    public static void onBeforeInsert(List<Jet__c> insertdList) {
+        
+        for (Jet__c jet : insertdList) {
+            if (jet.Status__c == 'On Hold') {
+                String message = jet.name + ' marked on hold by ' + UserInfo.getUserId() + '. Please review this jet.';
+                Id subjectId = [SELECT Id FROM Group WHERE name='Jet Operators'].get(0).Id;
+                NotificationsHelper.sendNotification(subjectId,message);
+            }
+        }
+    }
+    
+    public static void onBeforeUpdate(Map<id, Jet__c> insertdNewMap, Map<id, Jet__c> insertdOldMap) {
         List<Jet__c> jetsToUpdate = new List<Jet__c>();
 
         for (Id jetId : insertdNewMap.keySet()) {
@@ -31,11 +42,23 @@ public with sharing class JetTriggerHandler {
         update jetsToUpdate;
     }
 
-    public static void onAfterUndelete(Map<id, Jet__c> insertdNewMap) {
-        List<Jet__c> jetsToUpdate = new List<Jet__c>();
-        for (Jet__c jet : insertdNewMap.values()) {
+    public static void onBeforeUndelete(List<Jet__c> undeletedList) {
+        List<Jet__c> jetsToInsert = new List<Jet__c>();
+        for (Jet__c jet : undeletedList) {
             jet.Details__c = jet.Details__c + '\n Recovered at ' + Datetime.now();
+            jetsToInsert.add(jet);
         }
-        update jetsToUpdate;
+        insert jetsToInsert;
+    }
+    
+    public static void onAfterUndelete(Map<id, Jet__c> undeletedMap) {
+        List<Jet__c> jetsToInsert = new List<Jet__c>();
+        List<Jet__c> jetsFromDB = [SELECT Details__c FROM Jet__c WHERE Id IN :undeletedMap.keySet()];
+        Map<id, Jet__c> jetsFromDBMap = new Map<Id,Jet__c>([SELECT Details__c FROM Jet__c WHERE Id IN :undeletedMap.keySet()]);
+        for (Jet__c jet : jetsFromDB) {
+            jet.Details__c = jet.Details__c + '\n Recovered at ' + Datetime.now();
+            jetsToInsert.add(jet);
+        }
+        update jetsToInsert;
     }
 }
