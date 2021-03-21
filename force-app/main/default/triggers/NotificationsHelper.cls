@@ -11,7 +11,7 @@ public with sharing class NotificationsHelper {
 		mentionSegmentInput.id = subjectId; // Set @mention
 		messageBodyInput.messageSegments.add(mentionSegmentInput);
 
-		textSegmentInput.text = 'Blah blah blah blha';
+		textSegmentInput.text = message;
 		messageBodyInput.messageSegments.add(textSegmentInput);
 
 		feedItemInput.body = messageBodyInput;

@@ -1,7 +1,4 @@
 public with sharing class JetBookingTriggerHandler {
-    public JetBookingTriggerHandler() {
-
-    }
     
     public static void onBeforeInsert(List<Jet_Booking__c> insertdList) {
         for (Jet_Booking__c booking : insertdList) {
