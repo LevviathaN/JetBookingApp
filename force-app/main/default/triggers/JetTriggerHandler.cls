@@ -8,6 +8,7 @@ public with sharing class JetTriggerHandler {
         for (Jet__c jet : insertdList) {
             if (jet.Status__c == 'On Hold') {
                 String message = jet.name + ' marked on hold by ' + UserInfo.getUserId() + '. Please review this jet.';
+                System.debug(message);
                 Id subjectId = [SELECT Id FROM Group WHERE name='Jet Operators'].get(0).Id;
                 NotificationsHelper.sendNotification(subjectId,message);
             }
@@ -34,7 +35,11 @@ public with sharing class JetTriggerHandler {
         
             if (jet.Status__c == 'On Hold' && insertdOldMap.get(jetId).Status__c != 'On Hold') {
                 String message = jet.name + ' marked on hold by ' + UserInfo.getUserId() + '. Please review this jet.';
-                Id subjectId = [SELECT Id FROM Group WHERE name='Jet Operators'].get(0).Id;
+                System.debug(message);
+                Id subjectId = [SELECT Id FROM User WHERE alias='UUser'].get(0).Id;
+                //Id subjectId = [SELECT Id FROM Group WHERE name='Jet Operators'].get(0).Id;
+                //Id subjectId = UserInfo.getUserId();
+                System.debug('Subject ID: ' + subjectId);
                 NotificationsHelper.sendNotification(subjectId,message);
             }
         }
