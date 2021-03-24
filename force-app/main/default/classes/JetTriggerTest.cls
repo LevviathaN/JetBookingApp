@@ -66,4 +66,26 @@ public with sharing class JetTriggerTest {
         Jet__c jetUpdated = [select Details__c from Jet__c where id = :jet.id];
         System.assertEquals(jetUpdated.Details__c, 'Recovered at ' + dt1 + '\n Recovered at ' + dt2);
     }
+    
+    @IsTest public static void testOnHoldBeforeInsert() {
+        User u = [select name, Id  FROM user WHERE Alias = 'UUser'];
+        Jet__c jet = new Jet__c(Name='TestJet', Min_Required_Pilot_Hours__c=100, Status__c='On Hold');
+        
+        Test.startTest();
+        System.runAs(u){
+            insert jet;
+        }
+    }
+    
+    @IsTest public static void testOnHoldBeforeUpdate() {
+        User u = [select name, Id  FROM user WHERE Alias = 'UUser'];
+        Jet__c jet = new Jet__c(Name='TestJet', Min_Required_Pilot_Hours__c=100);
+        insert jet;
+        jet.Status__c='On Hold';
+        
+        Test.startTest();
+        System.runAs(u){
+            update jet;
+        }
+    }
 }

@@ -1,11 +1,11 @@
-trigger JetBookingTrigger on Jet_Booking__c (before insert, before update) {
+trigger JetBookingTrigger on Jet_Booking__c (after insert, after update) {
     Map<ID,Jet_Booking__c> ids = Trigger.newMap;
 
-    if (Trigger.isBefore) {
+    if (Trigger.isAfter) {
         if (Trigger.isInsert) {
-            JetBookingTriggerHandler.onBeforeInsert(Trigger.New);
+            JetBookingTriggerHandler.onAfterInsert(Trigger.New);
         } else if (Trigger.isUpdate) {
-            JetBookingTriggerHandler.onBeforeUpdate(Trigger.newMap, Trigger.oldMap);
+            JetBookingTriggerHandler.onAfterUpdate(Trigger.newMap, Trigger.oldMap);
         }
     }
 }
