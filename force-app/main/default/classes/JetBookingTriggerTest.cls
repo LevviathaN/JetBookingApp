@@ -27,8 +27,8 @@ public with sharing class JetBookingTriggerTest {
             insert jetBooking;
         }
         Test.stopTest();
-
-        System.assert(jetBooking.Status__c=='Automatically Approved');
+        Jet_Booking__c updatedBooking = [select Id, Status__c from Jet_Booking__c where Id = :jetBooking.id].get(0);
+        System.assertEquals(updatedBooking.Status__c,'Automatically Approved');
     }
     
     @IsTest public static void testSufficientPilotHoursOnUpdate(){
@@ -71,7 +71,8 @@ public with sharing class JetBookingTriggerTest {
         }
         Test.stopTest();
 
-        System.assert(jetBooking.Status__c=='Automatically Approved');
+        Jet_Booking__c updatedBooking = [select Id, Status__c from Jet_Booking__c where Id = :jetBooking.id].get(0);
+        System.assertEquals(updatedBooking.Status__c,'Automatically Approved');
     }
     
     @IsTest public static void testNotSufficientPilotHoursOnInsert(){

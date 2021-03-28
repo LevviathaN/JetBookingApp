@@ -5,8 +5,10 @@ public with sharing class JetTriggerHandler {
         for (Jet__c jet : insertdList) {
             if (jet.Status__c == 'On Hold') {
                 String message = jet.name + ' marked on hold by ' + UserInfo.getUserId() + '. Please review this jet.';
-                System.debug(message);
-                Id subjectId = [SELECT Id FROM Group WHERE name='Jet Operators'].get(0).Id;
+                System.debug('Message is: ' + message);
+                //Id subjectId = [SELECT Id FROM Group WHERE name='Jet Operators'].get(0).Id;
+                Id subjectId = [SELECT Id FROM User WHERE alias='UUser'].get(0).Id;
+                System.debug('Recepient group ID is: ' + subjectId);
                 NotificationsHelper.sendNotification(subjectId,message);
             }
         }

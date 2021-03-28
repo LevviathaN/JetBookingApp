@@ -17,7 +17,7 @@ public with sharing class JetTriggerTest {
         Jet_Booking__c jetBooking = new Jet_Booking__c(Customer__c=customer.id, Jet__c=jet.id, Departure_Airport__c=departureAirport.id,
         	Arival_Airport__c=arivalAirport.id, Status__c='Created');
         insert jetBooking;
-        Jet__c jetUpdated = [select Id, Name, Next_Inspection__c from Jet__c where Id = :jetBooking.Jet__c].get(0);
+        
         
         
         //Jet_Booking__c jetBooking = (Jet_Booking__c)generatedData.get('TestJetBooking');
@@ -33,7 +33,8 @@ public with sharing class JetTriggerTest {
         }
         Test.stopTest();
 
-        
+        Jet__c jetUpdated = [select Id, Name, Next_Inspection__c from Jet__c where Id = :jetBooking.Jet__c].get(0);
+        System.debug('Actual inspection date');
         Date d = Date.today().addDays(14);
         Datetime dt = (DateTime)d;
         String dayOfWeek = dt.format('EEEE');
@@ -67,7 +68,7 @@ public with sharing class JetTriggerTest {
         System.assertEquals(jetUpdated.Details__c, 'Recovered at ' + dt1 + '\n Recovered at ' + dt2);
     }
     
-    @IsTest public static void testOnHoldBeforeInsert() {
+    @IsTest(SeeAllData=true) public static void testOnHoldBeforeInsert() {
         User u = [select name, Id  FROM user WHERE Alias = 'UUser'];
         Jet__c jet = new Jet__c(Name='TestJet', Min_Required_Pilot_Hours__c=100, Status__c='On Hold');
         
@@ -75,9 +76,10 @@ public with sharing class JetTriggerTest {
         System.runAs(u){
             insert jet;
         }
+        Test.stopTest();
     }
     
-    @IsTest public static void testOnHoldBeforeUpdate() {
+    @IsTest(SeeAllData=true) public static void testOnHoldBeforeUpdate() {
         User u = [select name, Id  FROM user WHERE Alias = 'UUser'];
         Jet__c jet = new Jet__c(Name='TestJet', Min_Required_Pilot_Hours__c=100);
         insert jet;
@@ -87,5 +89,6 @@ public with sharing class JetTriggerTest {
         System.runAs(u){
             update jet;
         }
+        Test.stopTest();
     }
 }
