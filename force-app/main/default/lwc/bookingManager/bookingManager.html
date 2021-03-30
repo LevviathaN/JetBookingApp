@@ -1,5 +1,15 @@
 <template>
-    <div>
-        
-    </div>
+    <div class="wrapper">
+        <header class="header">Jet Bookings</header>
+        <section class="content">
+            <div class="columns">
+            <main class="main" >
+                <c-jet-list onjetselected={handleJetSelected}></c-jet-list>
+            </main>
+            <aside class="sidebar-second">
+                <c-bookings-list jet-id={selectedJetId}></c-bookings-list>
+            </aside>
+            </div>
+        </section>
+        </div>
 </template>

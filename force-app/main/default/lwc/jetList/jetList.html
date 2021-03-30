@@ -1,3 +1,12 @@
 <template>
-    
+    <div>
+        <!-- <a onclick={listClick}> -->
+            <lightning-datatable
+                    key-field="id"
+                    data={jets.data}
+                    columns={columns}>
+                    onrowaction={handleRowAction}>
+            </lightning-datatable>
+        <!-- </a> -->
+    </div>
 </template>
