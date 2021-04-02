@@ -25,10 +25,10 @@ const columns = [
 
 export default class JetList extends LightningElement {
 
-    @wire(getJetList) 
-     jets;
+    @wire(getJetList)
+    jets;
 
-    data = [];
+    //data = [];
     columns = columns;
 
     handleRowAction(event) {

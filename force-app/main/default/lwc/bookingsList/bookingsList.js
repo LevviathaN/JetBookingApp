@@ -1,5 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
-import getJetList from '@salesforce/apex/JetExp.getJetBookingList';
+import getJetBookingList from '@salesforce/apex/JetExp.getJetBookingList';
+import JET_BOOKING_OBJECT from '@salesforce/schema/Jet_Booking__c';
 
 const columns = [
     { label: 'Booking Name', fieldName: 'Name' },
@@ -7,18 +8,16 @@ const columns = [
 ];
 
 export default class BookingsList extends LightningElement {
-    jet;
-    _jetId = undefined;
-    @wire(getJetList)
+    @api _jetId = 'a033N000003ipmcQAA';
+    @wire(getJetBookingList, { jetId: '$_jetId' })
     bookings;
-    data = [];
     columns = columns;
 
     // Use set and get to process the value every time it's
     // requested while switching between products
     set jetId(value) {
         this._jetId = value;
-        // this.jet = bikes.find(bike => bike.fields.Id.value === value);
+        //this.selected = bookings.find(bookings => bookings.fields.Id.value === value);
     }
     
     // getter for jetId

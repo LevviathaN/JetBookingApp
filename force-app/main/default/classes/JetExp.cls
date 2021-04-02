@@ -6,8 +6,13 @@ public with sharing class JetExp {
     }
 
     @AuraEnabled(cacheable=true)
-    public static List<Jet_Booking__c> getJetBookingList() {
-       List<Jet_Booking__c> jetBookingList= [SELECT Name, Status__c FROM Jet_Booking__c];
+    public static List<Jet_Booking__c> getJetBookingList(Id jetId) {
+        List<Jet_Booking__c> jetBookingList;
+        try {
+            jetBookingList = [SELECT Name, Status__c FROM Jet_Booking__c WHERE Id = :jetId WITH SECURITY_ENFORCED];
+        } catch(System.QueryException qe) {
+            System.debug(qe.getMessage());
+        }
         return jetBookingList;
     }
 }
