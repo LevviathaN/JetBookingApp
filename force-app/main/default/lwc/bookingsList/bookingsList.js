@@ -8,8 +8,8 @@ const columns = [
 ];
 
 export default class BookingsList extends LightningElement {
-    @api _jetId = 'a033N000003ipmcQAA';
-    @wire(getJetBookingList, { jetId: '$_jetId' })
+    _jetId;
+    @wire(getJetBookingList, { jetId: '$jetId' })
     bookings;
     columns = columns;
 
@@ -17,7 +17,6 @@ export default class BookingsList extends LightningElement {
     // requested while switching between products
     set jetId(value) {
         this._jetId = value;
-        //this.selected = bookings.find(bookings => bookings.fields.Id.value === value);
     }
     
     // getter for jetId

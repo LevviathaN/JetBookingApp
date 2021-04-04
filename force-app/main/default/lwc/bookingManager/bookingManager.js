@@ -1,7 +1,7 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, api } from 'lwc';
 
 export default class BookingManager extends LightningElement {
-    selectedJetId
+    @api selectedJetId;
     handleJetSelected(evt) {
         this.selectedJetId = evt.detail;
     }

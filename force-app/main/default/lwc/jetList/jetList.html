@@ -2,10 +2,12 @@
     <div class="container">
         <!-- <a onclick={listClick}> -->
             <lightning-datatable
-                    key-field="id"
-                    data={jets.data}
-                    columns={columns}>
-                    onrowaction={handleRowAction}>
+                key-field="id"
+                data={jets.data}
+                columns={columns}
+                onrowaction={handleRowAction}
+                hide-checkbox-column
+            >
             </lightning-datatable>
         <!-- </a> -->
     </div>

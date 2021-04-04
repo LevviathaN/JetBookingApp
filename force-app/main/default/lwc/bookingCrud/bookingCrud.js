@@ -8,7 +8,8 @@ import ARIVAL_FIELD from '@salesforce/schema/Jet_Booking__c.Arival_Airport__c';
 
 export default class BookingCrud extends LightningElement {
     clickedButtonLabel;
-    show = false;
+    create = false;
+    update = false;
 
     selectedFields = [JET_FIELD, CUSTOMER_FIELD, DEPARTURE_FIELD, ARIVAL_FIELD];
 
@@ -18,7 +19,7 @@ export default class BookingCrud extends LightningElement {
     departureAirportField = DEPARTURE_FIELD;
     arivalAirportField = ARIVAL_FIELD;
 
-    accountId;
+    @api bookingId = 'a023N000005EHXUQA4';
     name = '';
 
     handleNameChange(event) {
@@ -34,13 +35,19 @@ export default class BookingCrud extends LightningElement {
     }
 
     handleCreateClick(event) {
-        this.show = true;
+        this.create = true;
+        this.update = false;
+    }
+
+    handleUpdateClick(event) {
+        this.create = false;
+        this.update = true;
     }
 
     handleCreateBookingClick(event) {
         // const fields = {};
         // fields[NAME_FIELD.fieldApiName] = this.name;
-        // const recordInput = { apiName: ACCOUNT_OBJECT.objectApiName, fields };
+        // const recordInput = { apiName: BOOKING_OBJECT.objectApiName, fields };
         // createRecord(recordInput)
         //     .then(account => {
         //         this.accountId = account.id;
