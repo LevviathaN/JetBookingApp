@@ -1,18 +1,19 @@
 <template>
     <div class="wrapper">
-        <header class="header">Jet Bookings</header>
-        <section class="content">
-            <div>
-                <c-booking-crud></c-booking-crud>
-            </div>
-            <div class="columns">
-            <main class="main" >
-                <c-jet-list onjetselected={handleJetSelected}></c-jet-list>
-            </main>
-            <aside class="sidebar-second">
-                <c-bookings-list jet-id={selectedJetId}></c-bookings-list>
-            </aside>
-            </div>
-        </section>
+        <c-booking-crud></c-booking-crud>
+    <header class="header">Available Bikes for {name}
+    </header>
+    <section class="content">
+        <div class="columns">
+        <main class="sidebar-first" >
+            <!-- <c-list onproductselected={handleProductSelected}></c-list> -->
+            <c-jet-list onjetselected={handleJetSelected}></c-jet-list>
+        </main>
+        <aside class="sidebar-second">
+            <!-- <c-detail product-id={selectedProductId}></c-detail> -->
+            <c-bookings-list jet-id={selectedJetId}></c-bookings-list>
+        </aside>
         </div>
+    </section>
+    </div>
 </template>
