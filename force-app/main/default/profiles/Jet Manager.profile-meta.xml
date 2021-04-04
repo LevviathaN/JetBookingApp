@@ -33,6 +33,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>JetExp</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>JetTriggerHandler</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -231,6 +235,10 @@
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
+        <tab>Booking_Management</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>Customer__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
@@ -240,6 +248,10 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>Jet__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>New_Booking_Manager</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <userLicense>Salesforce</userLicense>

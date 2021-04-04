@@ -15,8 +15,4 @@ export default class Selector extends LightningElement {
         return getFieldValue(this.user.data, NAME_FIELD);
     }
     clickedButtonLabel;
-
-    // handleClick(event) {
-    //     this.clickedButtonLabel = event.target.label;
-    // }
 }

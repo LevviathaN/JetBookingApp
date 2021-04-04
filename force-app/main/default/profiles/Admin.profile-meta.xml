@@ -5,6 +5,21 @@
         <default>false</default>
         <visible>true</visible>
     </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__LightningBolt</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__LightningSales</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__SalesforceCMS</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
     <classAccesses>
         <apexClass>ApprovalProcessHelper</apexClass>
         <enabled>true</enabled>
@@ -15,6 +30,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>JetBookingTriggerTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>JetExp</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -252,6 +271,10 @@
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
+        <tab>Booking_Management</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>Customer__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
@@ -261,6 +284,10 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>Jet__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>New_Booking_Manager</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <userLicense>Salesforce</userLicense>
