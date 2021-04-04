@@ -6,12 +6,12 @@
     <section class="content">
         <div class="columns">
         <main class="main" >
-            <c-list onproductselected={handleProductSelected}></c-list>
-            <!-- <c-jet-list onjetselected={handleJetSelected}></c-jet-list> -->
+            <!-- <c-list onproductselected={handleProductSelected}></c-list> -->
+            <c-jet-list onjetselected={handleJetSelected}></c-jet-list>
         </main>
         <aside class="sidebar-second">
-            <c-detail product-id={selectedProductId}></c-detail>
-            <!-- <c-bookings-list jet-id={selectedJetId}></c-bookings-list> -->
+            <!-- <c-detail product-id={selectedProductId}></c-detail> -->
+            <c-bookings-list jet-id={selectedJetId}></c-bookings-list>
         </aside>
         </div>
     </section>
